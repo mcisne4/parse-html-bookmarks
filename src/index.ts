@@ -1,3 +1,4 @@
+import { INSPECT_MAX_BYTES } from 'buffer'
 import { readFileSync } from 'fs'
 import path from 'path'
 
@@ -84,5 +85,24 @@ export function parseBookmarks(...filesPaths: string[]) {
         })
     })
 
-    // console.log(urlToBookmars)
+    /* Filter Bookmarks */
+    // console.log(Object.values(urlToBookmars).length)
+    let entries = Object.values(urlToBookmars)
+        // -- Remove `tags: ['Trash']` --
+        .filter(item => {
+            if (item.tags.includes('Trash') && item.tags.length === 1) {
+                return false
+            } else {
+                return true
+            }
+        })
+        .map(entry => {
+            if (entry.tags.includes('Trash')) {
+                const index: number = entry.tags.indexOf('Trash')
+                entry.tags.splice(index, 1)
+            }
+            return entry
+        })
+    // console.log(entries.length)
+    // console.log(entries)
 }
