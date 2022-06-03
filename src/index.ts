@@ -117,6 +117,24 @@ export function parseBookmarks(
             entry = _removeTags(entry, omitTags)
             return entry
         })
+
+    /* Format Results */
+    let bookmarks: Bookmark[] = []
+    let duplicates: BookmarkObjectEntry[] = []
+    entries.forEach(entry => {
+        if (entry.names.length === 1) {
+            bookmarks.push({
+                name: entry.names[0],
+                url: entry.url,
+                tags: entry.tags,
+            })
+        } else {
+            duplicates.push(entry)
+        }
+    })
+
+    /* Return */
+    return { bookmarks, duplicates }
 }
 
 function _removeTags(

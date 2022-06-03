@@ -12,7 +12,10 @@ const file4: string = process.env.FILE4 || ''
 const file5: string = ''
 const file6: string = ''
 
-parseBookmarks(
+const results = parseBookmarks(
     [file1, file2, file3, file4, file5, file6],
     ['Bookmarks', 'Temp']
 )
+
+console.log(results.bookmarks)
+console.log(results.duplicates)
