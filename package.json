@@ -2,11 +2,12 @@
     "name": "parse-vivaldi-bookmarks",
     "version": "1.0.0",
     "description": "Converts Vivaldi exported bookmarks into JSON format",
-    "main": "src/app.ts",
+    "main": "src/index.ts",
     "author": "mcisne4",
     "license": "MIT",
     "scripts": {
-        "dev": "yarn ts-node-dev --respawn --rs --clear src/app.ts"
+        "dev": "yarn ts-node-dev --respawn --rs --clear src/app.ts",
+        "dev-test": "yarn ts-node-dev --respawn --rs --clear test/dev.ts"
     },
     "devDependencies": {
         "@types/dotenv": "^8.2.0",
