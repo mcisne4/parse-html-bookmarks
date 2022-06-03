@@ -11,13 +11,26 @@ interface Bookmark {
 }
 interface BookmarkObject {
     [url: string]: {
-        names: [string]
+        names: string[]
         url: string
         tags: string[]
     }
 }
+interface BookmarkObjectEntry {
+    names: string[]
+    url: string
+    tags: string[]
+}
 
-export function parseBookmarks(...filesPaths: string[]) {
+export function parseBookmarks(
+    filesPaths: string | string[],
+    omitTags: string[] = []
+) {
+    /* Convert 'string' to 'string[]' */
+    if (typeof filesPaths === 'string') {
+        filesPaths = [filesPaths]
+    }
+
     /* Filter valid filenames entries */
     filesPaths = filesPaths
         .filter(filename => filename.length > 0)
@@ -86,7 +99,6 @@ export function parseBookmarks(...filesPaths: string[]) {
     })
 
     /* Filter Bookmarks */
-    // console.log(Object.values(urlToBookmars).length)
     let entries = Object.values(urlToBookmars)
         // -- Remove `tags: ['Trash']` --
         .filter(item => {
@@ -97,12 +109,29 @@ export function parseBookmarks(...filesPaths: string[]) {
             }
         })
         .map(entry => {
-            if (entry.tags.includes('Trash')) {
-                const index: number = entry.tags.indexOf('Trash')
-                entry.tags.splice(index, 1)
-            }
+            entry = _removeTags(entry, ['Trash'])
             return entry
         })
-    // console.log(entries.length)
-    // console.log(entries)
+        // -- Remove 'omitTags' --
+        .map(entry => {
+            entry = _removeTags(entry, omitTags)
+            return entry
+        })
+}
+
+function _removeTags(
+    bookmarkObjectEntry: BookmarkObjectEntry,
+    removeTagNames: string | string[]
+) {
+    /* Convert 'string' to 'string[]' */
+    if (typeof removeTagNames === 'string') {
+        removeTagNames = [removeTagNames]
+    }
+
+    /* Remove Tags */
+    bookmarkObjectEntry.tags = bookmarkObjectEntry.tags.filter(
+        name => !removeTagNames.includes(name)
+    )
+
+    return bookmarkObjectEntry
 }

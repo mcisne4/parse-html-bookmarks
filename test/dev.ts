@@ -12,4 +12,7 @@ const file4: string = process.env.FILE4 || ''
 const file5: string = ''
 const file6: string = ''
 
-parseBookmarks(file1, file2, file3, file4, file5, file6)
+parseBookmarks(
+    [file1, file2, file3, file4, file5, file6],
+    ['Bookmarks', 'Temp']
+)
