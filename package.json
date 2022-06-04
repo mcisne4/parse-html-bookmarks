@@ -1,7 +1,7 @@
 {
-    "name": "parse-vivaldi-bookmarks",
+    "name": "parse-html-bookmarks",
     "version": "1.0.0",
-    "description": "Converts Vivaldi exported bookmarks into JSON format",
+    "description": "Converts HTML exported browser bookmarks into JavaScript object format",
     "main": "src/index.ts",
     "author": "mcisne4",
     "license": "MIT",
