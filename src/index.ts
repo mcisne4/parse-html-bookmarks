@@ -15,7 +15,12 @@ interface BookmarkObject {
         tags: string[]
     }
 }
-export interface BookmarkObjectEntry {
+interface BookmarkObjectEntry {
+    names: string[]
+    url: string
+    tags: string[]
+}
+export interface BookmarkDuplicate {
     names: string[]
     url: string
     tags: string[]
@@ -121,7 +126,7 @@ export function parseBookmarks(
 
     /* Format Results */
     let bookmarks: Bookmark[] = []
-    let duplicates: BookmarkObjectEntry[] = []
+    let duplicates: BookmarkDuplicate[] = []
     entries.forEach(entry => {
         if (entry.names.length === 1) {
             bookmarks.push({

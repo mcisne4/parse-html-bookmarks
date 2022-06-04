@@ -1,8 +1,6 @@
 import { expect } from 'chai'
-import { parseBookmarks } from '../src/index'
+import { parseBookmarks, Bookmark, BookmarkDuplicate } from '../src/index'
 import { join } from 'path'
-
-import { Bookmark, BookmarkObjectEntry } from '../src/index'
 
 process.env.MODE = 'testing'
 
@@ -28,7 +26,7 @@ describe('Testing Filenames:', () => {
 
 describe("Testing data from 'file1':", () => {
     let bookmarks: Bookmark[]
-    let duplicates: BookmarkObjectEntry[]
+    let duplicates: BookmarkDuplicate[]
 
     beforeEach(() => {
         const data = parseBookmarks(file1)
@@ -55,7 +53,7 @@ describe("Testing data from 'file1':", () => {
 
 describe("Testing data from '[file1, file2]':", () => {
     let bookmarks: Bookmark[]
-    let duplicates: BookmarkObjectEntry[]
+    let duplicates: BookmarkDuplicate[]
 
     beforeEach(() => {
         const data = parseBookmarks([file1, file2])
@@ -106,7 +104,7 @@ describe("Testing data from '[file1, file2]':", () => {
 
 describe("Testing data from 'file4':", () => {
     let bookmarks: Bookmark[]
-    let duplicates: BookmarkObjectEntry[]
+    let duplicates: BookmarkDuplicate[]
 
     beforeEach(() => {
         const data = parseBookmarks(file4)
