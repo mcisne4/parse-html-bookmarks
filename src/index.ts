@@ -1,10 +1,9 @@
-import { INSPECT_MAX_BYTES } from 'buffer'
 import { readFileSync } from 'fs'
 import path from 'path'
 
 import { colors } from './lib/colors'
 
-interface Bookmark {
+export interface Bookmark {
     name: string
     url: string
     tags: string[]
@@ -16,7 +15,7 @@ interface BookmarkObject {
         tags: string[]
     }
 }
-interface BookmarkObjectEntry {
+export interface BookmarkObjectEntry {
     names: string[]
     url: string
     tags: string[]
@@ -47,12 +46,14 @@ export function parseBookmarks(
         try {
             fileData = readFileSync(filename, { encoding: 'utf8' })
         } catch (error) {
-            console.error(
-                `${colors.red + colors.invert} Error reading the file: ${
-                    colors.revert
-                } ${filename}\n`,
-                error
-            )
+            process.env.MODE !== 'testing' &&
+                console.error(
+                    `${colors.red + colors.invert} Error reading the file: ${
+                        colors.revert
+                    } ${filename}\n`,
+                    error
+                )
+            throw 'Error reading file'
         }
 
         /* Split File Data */

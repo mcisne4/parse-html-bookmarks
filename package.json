@@ -6,12 +6,18 @@
     "author": "mcisne4",
     "license": "MIT",
     "scripts": {
-        "dev": "yarn ts-node-dev --respawn --rs --clear src/app.ts",
-        "dev-test": "yarn ts-node-dev --respawn --rs --clear test/dev.ts"
+        "re-dev-test": "yarn ts-node-dev --respawn --rs --clear test/dev.ts",
+        "re-test": "yarn ts-mocha test/**/*test.ts -w --watch-files '**/*.ts'"
     },
     "devDependencies": {
+        "@types/chai": "^4.3.1",
         "@types/dotenv": "^8.2.0",
+        "@types/expect": "^24.3.0",
+        "@types/mocha": "^9.1.1",
         "@types/node": "^17.0.38",
+        "chai": "^4.3.6",
+        "mocha": "^10.0.0",
+        "ts-mocha": "^10.0.0",
         "ts-node-dev": "^2.0.0",
         "typescript": "^4.7.2"
     },
